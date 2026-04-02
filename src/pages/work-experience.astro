@@ -1,0 +1,185 @@
+---
+import '../styles/gh-profile.css';
+import Layout from '../layouts/Layout.astro';
+import {
+	workRole,
+	workSummaryParagraphs,
+	workSkillGroups,
+	workProjects,
+	languageColors,
+} from '../data/workExperiencePage';
+
+const siteName = 'Sarvesh Ramiya';
+
+function langColor(lang: string | undefined): string {
+	if (!lang) return languageColors.default;
+	return languageColors[lang] ?? languageColors.default;
+}
+---
+
+<Layout title={`Work experience — ${siteName}`} bodyClass="page-theme-github">
+	<div class="gh-page">
+		<main class="gh">
+			<h1 class="gh__sr-title">Work experience</h1>
+
+			<div class="gh__layout">
+				<aside class="gh__sidebar" aria-label="Role">
+				<img
+					class="gh__side-logo"
+					src="/logos/google.svg"
+					alt="Google"
+					width="24"
+					height="24"
+					loading="lazy"
+					decoding="async"
+				/>
+				<p class="gh__ldap">{workRole.ldap}</p>
+				<dl class="gh__role">
+				<div class="gh__role-item">
+						<dt class="gh__role-label">Company</dt>
+						<dd class="gh__role-value">{workRole.company}</dd>
+					</div>
+					<div class="gh__role-item">
+						<dt class="gh__role-label">Title</dt>
+						<dd class="gh__role-value">{workRole.jobTitle}</dd>
+					</div>
+					<div class="gh__role-item">
+						<dt class="gh__role-label">Location</dt>
+						<dd class="gh__role-value">{workRole.location}</dd>
+					</div>
+					<div class="gh__role-item">
+						<dt class="gh__role-label">Tenure</dt>
+						<dd class="gh__role-value">{workRole.tenure}</dd>
+					</div>
+					<div class="gh__role-item">
+						<dt class="gh__role-label">Org</dt>
+						<dd class="gh__role-value">{workRole.org}</dd>
+					</div>
+				</dl>
+
+				{
+					workRole.links && workRole.links.length > 0 && (
+						<ul class="gh__links">
+							{workRole.links.map((link) => (
+								<li>
+									<a href={link.href} class="gh__meta-link">
+										{link.label}
+									</a>
+								</li>
+							))}
+						</ul>
+					)
+				}
+
+				<section class="gh__sidebar-section" aria-labelledby="gh-skills-heading">
+					<h2 id="gh-skills-heading" class="gh__sidebar-heading">
+						Skills
+					</h2>
+					<ul class="gh__skill-groups">
+						{
+							workSkillGroups.map((group) => (
+								<li class="gh__skill-group">
+									<h3 class="gh__skill-cat">{group.category}</h3>
+									<ul class="gh__chips">
+										{group.items.map((item) => (
+											<li>
+												<span class="gh__chip">{item}</span>
+											</li>
+										))}
+									</ul>
+								</li>
+							))
+						}
+					</ul>
+				</section>
+				</aside>
+
+				<div class="gh__main">
+				<nav class="gh__nav" aria-label="Profile navigation">
+					<ul class="gh__tabs">
+						<li>
+							<span class="gh__tab gh__tab--active" aria-current="page">
+								<svg class="gh__tab-icon" viewBox="0 0 16 16" aria-hidden="true">
+									<path
+										fill="currentColor"
+										d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25Z"
+									/>
+									<path
+										fill="currentColor"
+										d="M3 8.75a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75Zm0-3.5a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75Zm0 7a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+									/>
+								</svg>
+								Overview
+							</span>
+						</li>
+					</ul>
+				</nav>
+
+				<section class="gh__readme" aria-labelledby="gh-readme-heading">
+					<h2 id="gh-readme-heading" class="gh__sr-only">Summary</h2>
+					<div class="gh__readme-bar">
+						<svg class="gh__readme-icon" viewBox="0 0 16 16" aria-hidden="true">
+							<path
+								fill="currentColor"
+								d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.494 2.494 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"
+							/>
+						</svg>
+						<span class="gh__readme-label">README.md</span>
+					</div>
+					<div class="gh__readme-body">
+						{
+							workSummaryParagraphs.map((p) => (
+								<p class="gh__readme-p">{p}</p>
+							))
+						}
+					</div>
+				</section>
+
+				<section class="gh__pinned" aria-labelledby="gh-pinned-heading">
+					<h2 id="gh-pinned-heading" class="gh__pinned-heading">
+						Pinned
+					</h2>
+					<ul class="gh__pinned-grid">
+						{
+							workProjects.map((project) => {
+								const dot = langColor(project.language);
+								const inner = (
+									<>
+										<div class="gh__repo-top">
+											<span class="gh__repo-name">{project.title}</span>
+											<span class="gh__repo-badge" title="Repository">
+												Public
+											</span>
+										</div>
+										<p class="gh__repo-desc">{project.description}</p>
+										{project.language && (
+											<div class="gh__repo-footer">
+												<span
+													class="gh__repo-lang-dot"
+													style={`background-color: ${dot}`}
+												/>
+												<span class="gh__repo-lang">{project.language}</span>
+											</div>
+										)}
+									</>
+								);
+								return (
+									<li class="gh__pinned-item">
+										{project.href ? (
+											<a href={project.href} class="gh__repo-card">
+												{inner}
+											</a>
+										) : (
+											<div class="gh__repo-card gh__repo-card--static">{inner}</div>
+										)}
+									</li>
+								);
+							})
+						}
+					</ul>
+				</section>
+				</div>
+			</div>
+		</main>
+	</div>
+</Layout>

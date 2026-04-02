@@ -1,0 +1,117 @@
+---
+const links = [
+	{ href: '/work-experience', label: 'Work experience' },
+	{ href: '/education', label: 'Education' },
+	{ href: '/blogs', label: 'Blogs' },
+] as const;
+---
+
+<header class="site-header">
+	<div class="site-header__inner">
+		<a class="site-header__brand" href="/">Sarvesh Ramiya</a>
+		<nav class="site-header__nav" aria-label="Primary">
+			<ul class="site-header__list">
+				{
+					links.map(({ href, label }) => (
+						<li class="site-header__item">
+							<a class="site-header__link" href={href}>
+								{label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		border-bottom: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+		background: rgba(19, 19, 20, 0.78);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+	}
+
+	.site-header__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		flex-wrap: wrap;
+		max-width: 72rem;
+		margin: 0 auto;
+		padding: 0.75rem clamp(1rem, 4vw, 1.5rem);
+		box-sizing: border-box;
+	}
+
+	.site-header__brand {
+		font-size: 0.9375rem;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: var(--color-text, #e8eaed);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.site-header__brand:hover {
+		color: var(--color-accent, #8ab4f8);
+	}
+
+	.site-header__nav {
+		margin-left: auto;
+	}
+
+	.site-header__list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 0.25rem 0.5rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.site-header__link {
+		display: block;
+		padding: 0.4rem 0.65rem;
+		font-size: 0.8125rem;
+		font-weight: 500;
+		color: var(--color-muted, #9aa0a6);
+		text-decoration: none;
+		border-radius: 8px;
+		transition:
+			color 0.15s ease,
+			background 0.15s ease;
+	}
+
+	.site-header__link:hover {
+		color: var(--color-text, #e8eaed);
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	.site-header__link:focus-visible {
+		outline: 2px solid var(--color-accent, #8ab4f8);
+		outline-offset: 2px;
+	}
+
+	@media (max-width: 520px) {
+		.site-header__inner {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.site-header__nav {
+			margin-left: 0;
+		}
+
+		.site-header__list {
+			justify-content: flex-start;
+		}
+	}
+</style>

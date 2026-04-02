@@ -1,0 +1,231 @@
+---
+import '../styles/gh-profile.css';
+import Layout from '../layouts/Layout.astro';
+import { educationDegrees } from '../data/educationPage';
+
+const siteName = 'Sarvesh Ramiya';
+---
+
+<Layout title={`Education — ${siteName}`} bodyClass="page-theme-github">
+	<div class="gh-page">
+		<main class="gh">
+			<h1 class="gh__sr-title">Education</h1>
+
+			{
+				(() => {
+					const currentDegree = educationDegrees[0];
+					const historyDegree = educationDegrees[1];
+					const currentIdx = 0;
+					const historyIdx = 1;
+
+					const renderDegree = (degree: (typeof currentDegree), idx: number) => (
+						<section class="gh__degree-card gh__degree-card--flat" aria-label={`${degree.degree} details`}>
+							<div class="gh__layout">
+								<aside class="gh__sidebar" aria-label={`${degree.degree} profile`}>
+									{degree.universityLogoSrc && (
+										<img
+											class="gh__side-logo"
+											src={degree.universityLogoSrc}
+											alt={degree.universityName}
+											width="24"
+											height="24"
+											loading="lazy"
+											decoding="async"
+										/>
+									)}
+									<p class="gh__ldap">{degree.sunet}</p>
+									<dl class="gh__role">
+										<div class="gh__role-item">
+											<dt class="gh__role-label">University</dt>
+											<dd class="gh__role-value">{degree.universityName}</dd>
+										</div>
+										<div class="gh__role-item">
+											<dt class="gh__role-label">Degree</dt>
+											<dd class="gh__role-value">{degree.degree}</dd>
+										</div>
+										<div class="gh__role-item">
+											<dt class="gh__role-label">Specialization</dt>
+											<dd class="gh__role-value">{degree.specialization}</dd>
+										</div>
+										<div class="gh__role-item">
+											<dt class="gh__role-label">Graduation date</dt>
+											<dd class="gh__role-value">{degree.graduationDate}</dd>
+										</div>
+										<div class="gh__role-item">
+											<dt class="gh__role-label">GPA</dt>
+											<dd class="gh__role-value">{degree.gpa}</dd>
+										</div>
+									</dl>
+
+									{
+										degree.awards && degree.awards.length > 0 && (
+											<section class="gh__sidebar-section" aria-labelledby={`edu-awards-heading-${idx}`}>
+												<h2
+													id={`edu-awards-heading-${idx}`}
+													class="gh__sidebar-heading"
+												>
+													Awards
+												</h2>
+												<ul class="gh__chips">
+													{
+														degree.awards.map((award) => (
+															<li>
+																<span class="gh__chip">{award}</span>
+															</li>
+														))
+													}
+												</ul>
+											</section>
+										)
+									}
+
+									{
+										degree.centralThemes && degree.centralThemes.length > 0 && (
+											<section
+												class="gh__sidebar-section"
+												aria-labelledby={`edu-themes-heading-${idx}`}
+											>
+												<h2
+													id={`edu-themes-heading-${idx}`}
+													class="gh__sidebar-heading"
+												>
+													Central themes
+												</h2>
+												<ul class="gh__chips">
+													{
+														degree.centralThemes.map((theme) => (
+															<li>
+																<span class="gh__chip">{theme}</span>
+															</li>
+														))
+													}
+												</ul>
+											</section>
+										)
+									}
+								</aside>
+
+								<div class="gh__main">
+									<nav class="gh__nav" aria-label="Education navigation">
+										<ul class="gh__tabs">
+											<li>
+												<span class="gh__tab gh__tab--active" aria-current="page">
+													<svg class="gh__tab-icon" viewBox="0 0 16 16" aria-hidden="true">
+														<path
+															fill="currentColor"
+															d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25Z"
+														/>
+														<path
+															fill="currentColor"
+															d="M3 8.75a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75Zm0-3.5a.75.75 0 0 1 .75-.75h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1-.75-.75Zm0 7a.75.75 0 0 1 .75-.75h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1-.75-.75Z"
+														/>
+													</svg>
+													Overview
+												</span>
+											</li>
+										</ul>
+									</nav>
+
+									<section class="edu-summary" aria-label="Summary">
+										<div class="gh__panel">
+											<div class="gh__panel-body">
+												{
+													degree.summaryParagraphs.map((p) => (
+														<p class="gh__readme-p">{p}</p>
+													))
+												}
+											</div>
+										</div>
+									</section>
+
+									<section class="gh__capstone-section" aria-labelledby={`edu-capstone-heading-${idx}`}>
+										<h2 id={`edu-capstone-heading-${idx}`} class="gh__cw-heading">
+											{degree.finalProjectLabel ?? 'Capstone'}
+										</h2>
+										<div class="gh__panel">
+											<div class="gh__panel-body">
+												{
+													degree.capstoneParagraphs.map((p) => (
+														<p class="gh__readme-p">{p}</p>
+													))
+												}
+											</div>
+										</div>
+									</section>
+
+									<section class="gh__cw-section" aria-labelledby={`edu-cw-heading-${idx}`}>
+										<h2 id={`edu-cw-heading-${idx}`} class="gh__cw-heading">
+											Notable Coursework &amp; Projects
+										</h2>
+										<ul class="gh__cw-grid">
+											{
+												degree.notableCoursework.map((item) => {
+													const inner = (
+														<>
+															<h3 class="gh__cw-course">{item.courseTitle}</h3>
+															{item.projectTitle && (
+																<p class="gh__cw-project">{item.projectTitle}</p>
+															)}
+															{item.description && (
+																<p class="gh__cw-desc">{item.description}</p>
+															)}
+														</>
+													);
+													return (
+														<li class="gh__cw-item">
+															{item.href ? (
+																<a href={item.href} class="gh__cw-card gh__cw-card--link">
+																	{inner}
+																</a>
+															) : (
+																<div class="gh__cw-card gh__cw-card--static">{inner}</div>
+															)}
+														</li>
+													);
+												})
+											}
+										</ul>
+									</section>
+								</div>
+							</div>
+						</section>
+					);
+
+					return (
+						<div class="gh__degree-stack">
+							<div id="education-current">{renderDegree(currentDegree, currentIdx)}</div>
+
+							<div class="gh__history-cta">
+								<button
+									id="education-view-history"
+									type="button"
+									class="gh__view-history"
+								>
+									View History
+								</button>
+							</div>
+
+							<div id="education-history" hidden>
+								{renderDegree(historyDegree, historyIdx)}
+							</div>
+
+							<script>
+								(() => {
+									const btn = document.getElementById('education-view-history');
+									const history = document.getElementById('education-history');
+									if (!btn || !history) return;
+
+									btn.addEventListener('click', () => {
+										const nextHidden = !history.hidden;
+										history.hidden = nextHidden;
+										btn.textContent = nextHidden ? 'View History' : 'Hide History';
+									});
+								})();
+							</script>
+						</div>
+					);
+				})()
+			}
+		</main>
+	</div>
+</Layout>
