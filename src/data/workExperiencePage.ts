@@ -34,9 +34,11 @@ export const workRole: WorkRole = {
 };
 
 export const workSummaryParagraphs: string[] = [
-	'I joined the Wear OS team at Google as an entry level software engineer in 2021 after completing my bachelors degree.',
-	'My primary objective is to help build a low latency data layer that would act as an intermediary to the various sensors and related algorithms on the device to provide apps with high-quality data related to activity, exercise, and health.',
-	'My contributions have played a critical role in features like Google\'s Personal Health Agent, Automatic Activity Detection, and more. On the peformance side, I have had the impact of cutting down exercise execution latency and battery consumption by over 40% in the newer generation of pixel watches.',
+	'I architect and optimize the Wear Health Services data layer. My work acts as the high-speed bridge between raw hardware sensors and top-level health applications, ensuring high-fidelity data delivery for millions of users.',
+	'Key Impacts:',
+	'- Performance: Re-engineered sensor fusion pipelines to slash exercise execution latency and battery drain by 40% for the latest Pixel Watch hardware.',
+	'- AI Integration: Developed the core data infrastructure powering Google’s Personal Health Agent and the high-frequency Automatic Activity Detection systems.',
+	'- System Design: Optimized the intermediary data layer to handle real-time sensor streams while maintaining a low memory footprint on resource-constrained Wear OS devices.'
 ];
 
 export const workSkillGroups: SkillGroup[] = [
